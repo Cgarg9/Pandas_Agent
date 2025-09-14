@@ -18,7 +18,6 @@ def initialize_llm():
             logger.error("GOOGLE_API_KEY environment variable not found")
             raise ValueError("GOOGLE_API_KEY environment variable is required")
         
-        # Initialize LLM exactly as specified
         llm = ChatGoogleGenerativeAI(
             model="gemini-2.5-flash",
             temperature=0,

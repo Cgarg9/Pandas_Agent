@@ -2,7 +2,7 @@
 import pandas as pd
 import os
 from pandas.errors import EmptyDataError, ParserError
-from logger_helper import get_logger  # Import your logger function
+from logger_helper import get_logger 
 
 def load_csv_data(file_path, log_file="data_loading.log"):
     """

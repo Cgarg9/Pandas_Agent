@@ -25,16 +25,15 @@ df = load_csv_data("Titanic-Dataset.csv")
 # Configure LLM
 llm = initialize_llm()
 
-# Create agent with graph-friendly instructions
 agent = create_pandas_dataframe_agent(
     llm,
     df,
     verbose=False,
-    allow_dangerous_code=True,
+    allow_dangerous_code=True, # The allow_dangerous_code=True is necessary for the agent to work, but you should implement additional security layers around it
     agent_executor_kwargs={"handle_parsing_errors": True}
 )
 
-# Working CSS Animation (same as before)
+# Working CSS Animation 
 st.markdown("""
 <style>
 /* Main container background */
@@ -219,7 +218,7 @@ def extract_and_execute_code(response_text):
                     'px': px,
                     'go': go,
                     'st': st,
-                    'plt': None  # We'll handle matplotlib if needed
+                    'plt': None  
                 }
                 
                 # Replace fig.show() with st.plotly_chart(fig) for Plotly
