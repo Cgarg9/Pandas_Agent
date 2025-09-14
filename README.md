@@ -29,5 +29,5 @@ A beautiful, interactive chatbot that lets you explore and visualize pandas Data
 - **Session management** for audit trails
 
 ### Demo pictures
-![alt text](<Screenshot 2025-09-14 at 9.02.48 PM.png>)
 ![alt text](<Screenshot 2025-09-14 at 9.02.37 PM.png>)
+![alt text](<Screenshot 2025-09-14 at 9.02.48 PM.png>)
