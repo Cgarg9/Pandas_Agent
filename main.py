@@ -10,14 +10,6 @@ from llm_config import initialize_llm
 import time 
 
 logger = get_logger()
- 
-# Configure page
-st.set_page_config(
-    page_title="DF Chat", 
-    page_icon="📊", 
-    layout="centered",
-    initial_sidebar_state="collapsed"
-)
 
 # Load data
 df = load_csv_data("Titanic-Dataset.csv")
@@ -30,7 +22,16 @@ agent = create_pandas_dataframe_agent(
     df,
     verbose=False,
     allow_dangerous_code=True, # The allow_dangerous_code=True is necessary for the agent to work, but you should implement additional security layers around it
-    agent_executor_kwargs={"handle_parsing_errors": True}
+    agent_executor_kwargs={"handle_parsing_errors": True},
+    return_intermediate_steps=True,
+)
+
+# Configure page
+st.set_page_config(
+    page_title="DF Chat", 
+    page_icon="📊", 
+    layout="centered",
+    initial_sidebar_state="collapsed"
 )
 
 # Working CSS Animation 
@@ -323,6 +324,9 @@ if prompt:
             processing_time = time.time() - start_time
             logger.info(f"Agent processing completed in {processing_time:.2f} seconds")
             answer = response.get("output", "No response generated.")
+            print("\nIntermediate Steps:")
+            for step in response["intermediate_steps"]:
+                print(step)
             logger.info("Agent response generated successfully")
             logger.debug(f"Agent response preview: {answer[:100]}...")  # Log first 100 chars
         except Exception as e:
