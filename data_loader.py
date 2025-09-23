@@ -3,7 +3,9 @@ import pandas as pd
 import os
 from pandas.errors import EmptyDataError, ParserError
 from logger_helper import get_logger 
+import streamlit as st
 
+@st.cache_data(ttl=3600)
 def load_csv_data(file_path, log_file="data_loading.log"):
     """
     Load CSV data with comprehensive error handling and logging.

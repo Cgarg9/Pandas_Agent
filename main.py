@@ -3,10 +3,10 @@ import pandas as pd
 import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
-from langchain_experimental.agents import create_pandas_dataframe_agent
 from logger_helper import get_logger
 from data_loader import load_csv_data
 from llm_config import initialize_llm
+from agent_config import initialize_agent
 import time 
 
 logger = get_logger()
@@ -17,14 +17,7 @@ df = load_csv_data("Titanic-Dataset.csv")
 # Configure LLM
 llm = initialize_llm()
 
-agent = create_pandas_dataframe_agent(
-    llm,
-    df,
-    verbose=False,
-    allow_dangerous_code=True, # The allow_dangerous_code=True is necessary for the agent to work, but you should implement additional security layers around it
-    agent_executor_kwargs={"handle_parsing_errors": True},
-    return_intermediate_steps=True,
-)
+agent = initialize_agent(llm, df)
 
 # Configure page
 st.set_page_config(
@@ -306,6 +299,7 @@ def create_sample_visualization(question, answer):
 
 # Chat interface
 prompt = st.chat_input("Ask about the Titanic DataFrame...")
+
 if prompt:
     logger.info(f"User query received: {prompt}")
     with st.container():

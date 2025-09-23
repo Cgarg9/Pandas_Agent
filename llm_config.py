@@ -2,10 +2,12 @@
 import os
 from langchain_google_genai import ChatGoogleGenerativeAI
 from logger_helper import get_logger
-
+import streamlit as st
 from dotenv import load_dotenv
+
 load_dotenv()
 
+@st.cache_resource
 def initialize_llm():
     """Initialize ChatGoogleGenerativeAI with environment variable for API key."""
     logger = get_logger("llm_config.log")
