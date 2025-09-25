@@ -21,7 +21,7 @@ agent = initialize_agent(llm, df)
 
 # Configure page
 st.set_page_config(
-    page_title="DF Chat", 
+    page_title="Pandas Agent", 
     page_icon="📊", 
     layout="centered",
     initial_sidebar_state="collapsed"
